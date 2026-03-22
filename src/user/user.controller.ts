@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { UserService } from './user.service';
-import { get } from 'http';
+
 
 type Users = {
   id: number;
