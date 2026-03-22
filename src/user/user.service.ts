@@ -8,10 +8,9 @@ export class UserService {
   test(): string[] {
     return [];
   }
-  findAll(): IUser []{
-    const filePath = path.join(process.cwd(), 'data','users.json');
+  findAll(): IUser[] {
+    const filePath = path.join(process.cwd(), 'data', 'users.json');
     const data = fs.readFileSync(filePath, 'utf-8');
     return JSON.parse(data);
-  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+  }
 }
-
