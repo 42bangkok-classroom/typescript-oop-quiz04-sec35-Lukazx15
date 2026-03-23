@@ -44,8 +44,8 @@ export class UserService {
     const filePath = path.join(process.cwd(), 'data', 'users.json');
     const data = fs.readFileSync(filePath, 'utf-8');
     const users = JSON.parse(data) as IUser[];
-
-    const newId = (users.length + 1).toString();
+    const lastId = users.length > 0 ? Number(users[users.length - 1].id) : 0;
+    const newId = (lastId + 1).toString();
     const newUser: IUser = {
       id: newId,
       firstName: dto.fristname,
