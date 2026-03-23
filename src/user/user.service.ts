@@ -3,17 +3,20 @@ import { IUser } from './user.interface';
 import * as fs from 'fs';
 import * as path from 'path';
 import { NotFoundException } from '@nestjs/common';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {
   test(): string[] {
     return [];
   }
+
   findAll(): IUser[] {
     const filePath = path.join(process.cwd(), 'data', 'users.json');
     const data = fs.readFileSync(filePath, 'utf-8');
     return JSON.parse(data) as IUser[];
   }
+
   findOne(id: string, fields?: string[]): Partial<IUser> {
     const users = this.findAll();
 
@@ -35,5 +38,23 @@ export class UserService {
       }
     }
     return result;
+  }
+
+  create(dto: CreateUserDto): IUser {
+    const filePath = path.join(process.cwd(), 'data', 'users.json');
+    const data = fs.readFileSync(filePath, 'utf-8');
+    const users = JSON.parse(data) as IUser[];
+
+    const newId = (users.length + 1).toString();
+    const newUser: IUser = {
+      id: newId,
+      firstName: dto.fristname,
+      lastName: dto.lastname,
+      email: dto.email,
+      username: dto.username,
+    };
+    users.push(newUser);
+    fs.writeFileSync(filePath, JSON.stringify(users, null, 2));
+    return newUser;
   }
 }
