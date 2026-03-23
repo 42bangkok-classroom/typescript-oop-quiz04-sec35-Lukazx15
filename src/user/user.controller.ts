@@ -34,7 +34,9 @@ export class UserController {
   }
 
   @Post()
-  create(@Body(new ValidationPipe()) dto: CreateUserDto): IUser {
+  create(
+    @Body(new ValidationPipe({ whitelist: true })) dto: CreateUserDto,
+  ): IUser {
     return this.userService.create(dto);
   }
 }

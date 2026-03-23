@@ -48,7 +48,7 @@ export class UserService {
     const newId = (lastId + 1).toString();
     const newUser: IUser = {
       id: newId,
-      firstName: dto.fristname,
+      firstName: dto.firstname,
       lastName: dto.lastname,
       email: dto.email,
       username: dto.username,
